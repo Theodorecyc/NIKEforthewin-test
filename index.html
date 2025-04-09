@@ -2,49 +2,471 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <title>測驗網頁</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏀 籃球術語英文測驗 (32題)</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        h1 {
+            color: #e63946;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #457b9d;
+            padding-bottom: 10px;
+        }
+        .question-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        .difficulty {
+            background-color: #457b9d;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+        }
+        .options {
+            margin: 15px 0;
+        }
+        .option {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option:hover {
+            background-color: #f1faee;
+            border-color: #a8dadc;
+        }
+        .option.selected {
+            background-color: #a8dadc;
+            border-color: #457b9d;
+        }
+        .option.correct {
+            background-color: #c7f9cc;
+            border-color: #2a9d8f;
+        }
+        .option.incorrect {
+            background-color: #ffadad;
+            border-color: #e63946;
+        }
+        button {
+            background-color: #e63946;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.2s;
+            display: block;
+            margin: 20px auto;
+        }
+        button:hover {
+            background-color: #d62839;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        #result {
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+            min-height: 24px;
+        }
+        #progress {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #457b9d;
+        }
+        #score-container {
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #a8dadc;
+            border-radius: 8px;
+            display: none;
+        }
+        .star-rating {
+            color: #ffd700;
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+    </style>
 </head>
 <body>
-    <!-- Logo 區域（固定在頂部） -->
-    <div id="logo-container">
-        <img id="logo" src="logo.png" alt="Logo">
+    <h1>🏀 籃球術語英文測驗</h1>
+    <div id="progress">第 1 題 / 32 題</div>
+    <div id="quiz-container" class="question-container">
+        <!-- 題目將在這裡動態載入 -->
+    </div>
+    <div id="result"></div>
+    <button id="next-btn" onclick="nextQuestion()" disabled>下一題</button>
+    <div id="score-container">
+        <h2>測驗完成！</h2>
+        <div id="score"></div>
+        <div id="stars" class="star-rating"></div>
+        <button onclick="restartQuiz()">重新測驗</button>
     </div>
 
-    <!-- 主內容區域 -->
-    <div id="main-container">
-        <!-- 側邊欄：合作夥伴圖片 -->
-        <div id="partner-sidebar">
-            <p>合作夥伴：</p>
-            <img id="partner-img" src="partner.png" alt="合作夥伴">
-        </div>
+    <script>
+        const quizData = {
+            "questions": [
+                {
+                    "level": 1,
+                    "question": "「運球」的英文是？",
+                    "options": ["Pass", "Dribble", "Shoot", "Block"],
+                    "answer": 1,
+                    "translation": "Dribble"
+                },
+                {
+                    "level": 1,
+                    "question": "「傳球」的英文是？",
+                    "options": ["Pass", "Dribble", "Rebound", "Screen"],
+                    "answer": 0,
+                    "translation": "Pass"
+                },
+                {
+                    "level": 1,
+                    "question": "「搶籃板」的英文術語是？",
+                    "options": ["Steal", "Assist", "Rebound", "Timeout"],
+                    "answer": 2,
+                    "translation": "Rebound"
+                },
+                {
+                    "level": 1,
+                    "question": "「罰球」在英文中稱為？",
+                    "options": ["Jump shot", "Layup", "Free throw", "Dunk"],
+                    "answer": 2,
+                    "translation": "Free throw"
+                },
+                {
+                    "level": 1,
+                    "question": "「抄截」的英文是？",
+                    "options": ["Block", "Steal", "Assist", "Travel"],
+                    "answer": 1,
+                    "translation": "Steal"
+                },
+                {
+                    "level": 1,
+                    "question": "「助攻」的英文是？",
+                    "options": ["Rebound", "Assist", "Screen", "Turnover"],
+                    "answer": 1,
+                    "translation": "Assist"
+                },
+                {
+                    "level": 1,
+                    "question": "「火鍋」的英文是？",
+                    "options": ["Block", "Charge", "Flop", "Screen"],
+                    "answer": 0,
+                    "translation": "Block"
+                },
+                {
+                    "level": 1,
+                    "question": "「暫停」的英文是？",
+                    "options": ["Foul", "Violation", "Timeout", "Jump ball"],
+                    "answer": 2,
+                    "translation": "Timeout"
+                },
+                {
+                    "level": 2,
+                    "question": "「擋拆」的英文是？",
+                    "options": ["Pick and roll", "Backdoor cut", "Fast break", "Alley-oop"],
+                    "answer": 0,
+                    "translation": "Pick and roll"
+                },
+                {
+                    "level": 2,
+                    "question": "「區域聯防」的英文術語是？",
+                    "options": ["Man defense", "Zone defense", "Press defense", "Transition"],
+                    "answer": 1,
+                    "translation": "Zone defense"
+                },
+                {
+                    "level": 2,
+                    "question": "「走步違例」的英文是？",
+                    "options": ["Double dribble", "Traveling", "Carry", "Goaltending"],
+                    "answer": 1,
+                    "translation": "Traveling"
+                },
+                {
+                    "level": 2,
+                    "question": "「攻守轉換」的英文是？",
+                    "options": ["Transition", "Screen", "Flop", "Rebound"],
+                    "answer": 0,
+                    "translation": "Transition"
+                },
+                {
+                    "level": 2,
+                    "question": "「空中接力」的英文是？",
+                    "options": ["Crossover", "Alley-oop", "Euro step", "Hook shot"],
+                    "answer": 1,
+                    "translation": "Alley-oop"
+                },
+                {
+                    "level": 2,
+                    "question": "「快攻」的英文是？",
+                    "options": ["Fast break", "Half-court offense", "Delay game", "Motion offense"],
+                    "answer": 0,
+                    "translation": "Fast break"
+                },
+                {
+                    "level": 2,
+                    "question": "「二次運球違例」的英文是？",
+                    "options": ["Traveling", "Double dribble", "Carry", "Backcourt"],
+                    "answer": 1,
+                    "translation": "Double dribble"
+                },
+                {
+                    "level": 2,
+                    "question": "「24秒進攻時間」的英文是？",
+                    "options": ["Game clock", "Shot clock", "Timeout", "Quarter"],
+                    "answer": 1,
+                    "translation": "Shot clock"
+                },
+                {
+                    "level": 3,
+                    "question": "「牛角戰術」的英文是？",
+                    "options": ["Horns set", "Princeton offense", "Flex cut", "Box-and-one"],
+                    "answer": 0,
+                    "translation": "Horns set"
+                },
+                {
+                    "level": 3,
+                    "question": "「假摔」的英文術語是？",
+                    "options": ["Charge", "Flop", "Block", "Screen"],
+                    "answer": 1,
+                    "translation": "Flop"
+                },
+                {
+                    "level": 3,
+                    "question": "「歐洲步」的英文是？",
+                    "options": ["Euro step", "Spin move", "Stepback", "Drop step"],
+                    "answer": 0,
+                    "translation": "Euro step"
+                },
+                {
+                    "level": 3,
+                    "question": "「邊線發球戰術」的英文縮寫是？",
+                    "options": ["BLOB", "SLOB", "ATO", "ICE"],
+                    "answer": 1,
+                    "translation": "SLOB (Sideline Out of Bounds)"
+                },
+                {
+                    "level": 3,
+                    "question": "「包夾防守」的英文是？",
+                    "options": ["Double team", "Help defense", "Closeout", "Hedge"],
+                    "answer": 0,
+                    "translation": "Double team"
+                },
+                {
+                    "level": 3,
+                    "question": "「底線切入」的英文是？",
+                    "options": ["Backdoor cut", "Flare cut", "V-cut", "L-cut"],
+                    "answer": 0,
+                    "translation": "Backdoor cut"
+                },
+                {
+                    "level": 3,
+                    "question": "「掩護」的英文是？",
+                    "options": ["Screen", "Pick", "Roll", "Pop"],
+                    "answer": 0,
+                    "translation": "Screen"
+                },
+                {
+                    "level": 3,
+                    "question": "「全場緊迫防守」的英文是？",
+                    "options": ["Full-court press", "Half-court press", "Zone press", "Man press"],
+                    "answer": 0,
+                    "translation": "Full-court press"
+                },
+                {
+                    "level": 4,
+                    "question": "「賽後戰術分析」的英文縮寫是？",
+                    "options": ["ATO", "BLOB", "LOB", "SCOUT"],
+                    "answer": 3,
+                    "translation": "Scouting Report"
+                },
+                {
+                    "level": 4,
+                    "question": "「假掩護後切入」的英文術語是？",
+                    "options": ["Ghost screen", "Flare screen", "Back screen", "Down screen"],
+                    "answer": 0,
+                    "translation": "Ghost screen"
+                },
+                {
+                    "level": 4,
+                    "question": "「延遲進攻」的英文是？",
+                    "options": ["Fast break", "Delay offense", "Transition", "Motion offense"],
+                    "answer": 1,
+                    "translation": "Delay offense"
+                },
+                {
+                    "level": 4,
+                    "question": "「鎖定對方王牌球員的防守戰術」稱為？",
+                    "options": ["Box-and-one", "2-3 zone", "Full-court press", "Hedge"],
+                    "answer": 0,
+                    "translation": "Box-and-one"
+                },
+                {
+                    "level": 4,
+                    "question": "「罰球線延伸側的位置」英文稱為？",
+                    "options": ["Elbow", "Wing", "Corner", "Top of the key"],
+                    "answer": 0,
+                    "translation": "Elbow"
+                },
+                {
+                    "level": 4,
+                    "question": "「擋拆後衛的防守策略」英文是？",
+                    "options": ["Hedge and recover", "Ice", "Switch", "Blitz"],
+                    "answer": 0,
+                    "translation": "Hedge and recover"
+                },
+                {
+                    "level": 4,
+                    "question": "「暫停後設計的戰術」英文縮寫是？",
+                    "options": ["ATO", "BLOB", "SLOB", "LOB"],
+                    "answer": 0,
+                    "translation": "ATO (After Timeout)"
+                },
+                {
+                    "level": 4,
+                    "question": "「強弱邊轉移」的英文是？",
+                    "options": ["Swing the ball", "Reverse the ball", "Skip pass", "Cross-court"],
+                    "answer": 0,
+                    "translation": "Swing the ball"
+                }
+            ]
+        };
 
-        <!-- 測驗內容區域 -->
-        <div id="content-container">
-            <!-- 測驗區域 -->
-            <div id="quiz-container" style="display: block;">
-                <h2 id="question"></h2>
-                <div id="options"></div>
-                <button id="next-btn">下一題</button>
-            </div>
+        let currentQuestion = 0;
+        let score = 0;
+        let selectedOption = null;
 
-            <!-- 結果區域 -->
-            <div id="result-container" style="display: none;">
-                <h2>測驗結果</h2>
-                <p>你的正確率：<span id="score"></span></p>
-                <img id="encourage-img" src="" alt="鼓勵圖片">
-                <button id="review-btn">查看答案</button>
-            </div>
+        function loadQuestion() {
+            const q = quizData.questions[currentQuestion];
+            document.getElementById('quiz-container').innerHTML = `
+                <div class="question-header">
+                    <span>第 ${currentQuestion + 1} 題</span>
+                    <span class="difficulty">難度: ${'★'.repeat(q.level)}</span>
+                </div>
+                <h3>${q.question}</h3>
+                <div class="options">
+                    ${q.options.map((opt, i) => `
+                        <div class="option" onclick="selectOption(${i})" id="option-${i}">
+                            ${String.fromCharCode(65 + i)}. ${opt}
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            document.getElementById('progress').innerText = `第 ${currentQuestion + 1} 題 / 32 題`;
+            document.getElementById('result').innerHTML = '';
+            document.getElementById('next-btn').disabled = true;
+            selectedOption = null;
+        }
 
-            <!-- 答案回顧區域 -->
-            <div id="review-container" style="display: none;">
-                <h2>答案回顧</h2>
-                <div id="review-content"></div>
-                <button id="back-btn">返回結果</button>
-            </div>
-        </div>
-    </div>
+        function selectOption(index) {
+            // 移除之前選擇的樣式
+            if (selectedOption !== null) {
+                document.getElementById(`option-${selectedOption}`).classList.remove('selected');
+            }
+            
+            // 添加新選擇的樣式
+            document.getElementById(`option-${index}`).classList.add('selected');
+            selectedOption = index;
+            document.getElementById('next-btn').disabled = false;
+        }
 
-    <script src="script.js"></script>
+        function nextQuestion() {
+            if (selectedOption === null) return;
+            
+            const correctAnswer = quizData.questions[currentQuestion].answer;
+            const userAnswer = selectedOption;
+            
+            // 顯示正確/錯誤樣式
+            document.getElementById(`option-${correctAnswer}`).classList.add('correct');
+            if (userAnswer !== correctAnswer) {
+                document.getElementById(`option-${userAnswer}`).classList.add('incorrect');
+                document.getElementById('result').innerHTML = `❌ 正確答案: <strong>${quizData.questions[currentQuestion].options[correctAnswer]}</strong> (${quizData.questions[currentQuestion].translation})`;
+            } else {
+                score++;
+                document.getElementById('result').innerHTML = `✅ <strong>答對了！</strong> (${quizData.questions[currentQuestion].translation})`;
+            }
+            
+            // 禁用所有選項
+            for (let i = 0; i < 4; i++) {
+                document.getElementById(`option-${i}`).onclick = null;
+            }
+            
+            // 更新下一題按鈕
+            document.getElementById('next-btn').innerText = currentQuestion === quizData.questions.length - 1 ? '查看結果' : '下一題';
+            document.getElementById('next-btn').onclick = currentQuestion === quizData.questions.length - 1 ? showResult : () => {
+                currentQuestion++;
+                loadQuestion();
+            };
+        }
+
+        function showResult() {
+            document.getElementById('quiz-container').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'none';
+            document.getElementById('progress').style.display = 'none';
+            
+            const scorePercentage = Math.round((score / quizData.questions.length) * 100);
+            let stars = '';
+            if (scorePercentage >= 90) stars = '★★★★★';
+            else if (scorePercentage >= 70) stars = '★★★★';
+            else if (scorePercentage >= 50) stars = '★★★';
+            else if (scorePercentage >= 30) stars = '★★';
+            else stars = '★';
+            
+            document.getElementById('score-container').style.display = 'block';
+            document.getElementById('score').innerHTML = `
+                <p>你的得分: <strong>${score} / ${quizData.questions.length}</strong> (${scorePercentage}%)</p>
+                <p>等級: <strong>${getGrade(scorePercentage)}</strong></p>
+            `;
+            document.getElementById('stars').innerHTML = stars;
+        }
+
+        function getGrade(percentage) {
+            if (percentage >= 90) return 'MVP級';
+            if (percentage >= 75) return '先發球員級';
+            if (percentage >= 60) return '替補球員級';
+            if (percentage >= 40) return '練習生級';
+            return '觀眾級';
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            document.getElementById('quiz-container').style.display = 'block';
+            document.getElementById('next-btn').style.display = 'block';
+            document.getElementById('progress').style.display = 'block';
+            document.getElementById('next-btn').innerText = '下一題';
+            document.getElementById('next-btn').onclick = nextQuestion;
+            document.getElementById('score-container').style.display = 'none';
+            loadQuestion();
+        }
+
+        // 初始化測驗
+        loadQuestion();
+    </script>
 </body>
 </html>
