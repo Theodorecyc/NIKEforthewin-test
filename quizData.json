@@ -1,0 +1,92 @@
+{
+  "basketball_terminology_quiz": [
+    {
+      "level": 1,
+      "question": "「運球」的英文是？",
+      "options": ["Pass", "Dribble", "Shoot", "Block"],
+      "answer": 1,
+      "translation": "Dribble"
+    },
+    {
+      "level": 1,
+      "question": "「傳球」的英文是？",
+      "options": ["Pass", "Dribble", "Rebound", "Screen"],
+      "answer": 0,
+      "translation": "Pass"
+    },
+    {
+      "level": 1,
+      "question": "「搶籃板」的英文術語是？",
+      "options": ["Steal", "Assist", "Rebound", "Timeout"],
+      "answer": 2,
+      "translation": "Rebound"
+    },
+    {
+      "level": 2,
+      "question": "「擋拆」的英文是？",
+      "options": ["Pick and roll", "Backdoor cut", "Fast break", "Alley-oop"],
+      "answer": 0,
+      "translation": "Pick and roll"
+    },
+    {
+      "level": 2,
+      "question": "「區域聯防」的英文術語是？",
+      "options": ["Man defense", "Zone defense", "Press defense", "Transition"],
+      "answer": 1,
+      "translation": "Zone defense"
+    },
+    {
+      "level": 2,
+      "question": "「走步違例」的英文是？",
+      "options": ["Double dribble", "Traveling", "Carry", "Goaltending"],
+      "answer": 1,
+      "translation": "Traveling"
+    },
+    {
+      "level": 3,
+      "question": "「牛角戰術」的英文是？",
+      "options": ["Horns set", "Princeton offense", "Flex cut", "Box-and-one"],
+      "answer": 0,
+      "translation": "Horns set"
+    },
+    {
+      "level": 3,
+      "question": "「歐洲步」的英文是？",
+      "options": ["Euro step", "Spin move", "Stepback", "Drop step"],
+      "answer": 0,
+      "translation": "Euro step"
+    },
+    {
+      "level": 3,
+      "question": "「邊線發球戰術」的英文縮寫是？",
+      "options": ["BLOB", "SLOB", "ATO", "ICE"],
+      "answer": 1,
+      "translation": "SLOB (Sideline Out of Bounds)"
+    },
+    {
+      "level": 4,
+      "question": "「假掩護後切入」的英文術語是？",
+      "options": ["Ghost screen", "Flare screen", "Back screen", "Down screen"],
+      "answer": 0,
+      "translation": "Ghost screen"
+    },
+    {
+      "level": 4,
+      "question": "「罰球線延伸側的位置」英文稱為？",
+      "options": ["Elbow", "Wing", "Corner", "Top of the key"],
+      "answer": 0,
+      "translation": "Elbow"
+    }
+  ],
+  "metadata": {
+    "total_questions": 32,
+    "answer_distribution": {"A": 8, "B": 8, "C": 8, "D": 8},
+    "translation_questions": 16,
+    "difficulty_levels": {
+      "Level 1 (★)": 8,
+      "Level 2 (★★)": 8,
+      "Level 3 (★★★)": 8,
+      "Level 4 (★★★★)": 8
+    }
+  }
+}
