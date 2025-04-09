@@ -2,7 +2,6 @@
 const quizData = [
     { question: "1+1=?", options: ["1", "2", "3", "4"], answer: "2", pronunciation: "two.mp3" },
     { question: "2+2=?", options: ["2", "4", "6", "8"], answer: "4", pronunciation: "four.mp3" },
-    // 可自行增加題目
 ];
 
 let currentQuestion = 0;
@@ -60,13 +59,13 @@ function showResult() {
     scoreEl.textContent = `${score.toFixed(2)}%`;
 
     if (score < 30) {
-        encourageImg.src = "low_score.jpg"; // 替換為實際圖片路徑
+        encourageImg.src = "low_score.jpg";
     } else if (score < 60) {
         encourageImg.src = "mid_score.jpg";
     } else if (score >= 85) {
         encourageImg.src = "high_score.jpg";
     } else {
-        encourageImg.src = "default_score.jpg"; // 60%-85% 的情況
+        encourageImg.src = "default_score.jpg";
     }
 }
 
