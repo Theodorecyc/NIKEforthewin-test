@@ -1,12 +1,8 @@
-// 題目數據（示例）
-const quizData = [
-    { question: "1+1=?", options: ["1", "2", "3", "4"], answer: "2", pronunciation: "two.mp3" },
-    { question: "2+2=?", options: ["2", "4", "6", "8"], answer: "4", pronunciation: "four.mp3" },
-];
-
+// 初始變數
+let quizData = []; // 初始為空陣列，將從 JSON 加載
 let currentQuestion = 0;
 let userAnswers = [];
-const totalQuestions = quizData.length;
+let totalQuestions = 0;
 
 // 元素獲取
 const quizContainer = document.getElementById("quiz-container");
@@ -20,6 +16,24 @@ const encourageImg = document.getElementById("encourage-img");
 const reviewBtn = document.getElementById("review-btn");
 const reviewContent = document.getElementById("review-content");
 const backBtn = document.getElementById("back-btn");
+
+// 從 quizData.json 加載題庫
+fetch("quizData.json")
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("無法加載 quizData.json");
+        }
+        return response.json();
+    })
+    .then(data => {
+        quizData = data;
+        totalQuestions = quizData.length;
+        showQuestion(); // 加載完成後顯示第一題
+    })
+    .catch(error => {
+        console.error("加載題庫失敗:", error);
+        alert("無法加載題庫，請檢查 quizData.json 是否存在或格式是否正確。");
+    });
 
 // 顯示題目
 function showQuestion() {
@@ -67,6 +81,9 @@ function showResult() {
     } else {
         encourageImg.src = "default_score.jpg";
     }
+
+    // 儲存 userAnswers 到 localStorage（可選）
+    localStorage.setItem("userAnswers", JSON.stringify(userAnswers));
 }
 
 // 查看答案
@@ -96,6 +113,3 @@ backBtn.onclick = () => {
     reviewContainer.style.display = "none";
     resultContainer.style.display = "block";
 };
-
-// 初始化
-showQuestion();
