@@ -5,17 +5,36 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: #f9f9f9;
+}
+
+h1 {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+p {
+    font-size: 16px;
+    color: #666;
 }
 
 button {
     padding: 10px 20px;
     margin: 5px;
     cursor: pointer;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #e0e0e0;
 }
 
 .option {
     display: block;
-    margin: 10px;
+    margin: 10px auto;
+    width: 200px;
 }
 
 img {
@@ -27,11 +46,11 @@ img {
 #logo-container {
     text-align: center;
     padding: 10px 0;
-    background-color: #f5f5f5; /* 可選：添加背景色 */
+    background-color: #f5f5f5;
 }
 
 #logo {
-    max-width: 150px; /* 可根據你的 Logo 尺寸調整 */
+    max-width: 150px;
 }
 
 /* 主內容區域 */
@@ -42,14 +61,14 @@ img {
 
 /* 合作夥伴側邊欄（左手邊） */
 #partner-sidebar {
-    width: 200px; /* 固定寬度，可調整 */
+    width: 200px;
     padding: 20px;
     text-align: center;
-    background-color: #f0f0f0; /* 可選：添加背景色 */
+    background-color: #f0f0f0;
 }
 
 #partner-img {
-    max-width: 150px; /* 可根據你的合作夥伴圖片尺寸調整 */
+    max-width: 150px;
 }
 
 /* 測驗內容區域 */
