@@ -6,26 +6,43 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- 測驗區域 -->
-    <div id="quiz-container" style="display: block;">
-        <h2 id="question"></h2>
-        <div id="options"></div>
-        <button id="next-btn">下一題</button>
+    <!-- Logo 區域（固定在頂部） -->
+    <div id="logo-container">
+        <img id="logo" src="logo.png" alt="Logo">
     </div>
 
-    <!-- 結果區域 -->
-    <div id="result-container" style="display: none;">
-        <h2>測驗結果</h2>
-        <p>你的正確率：<span id="score"></span></p>
-        <img id="encourage-img" src="" alt="鼓勵圖片">
-        <button id="review-btn">查看答案</button>
-    </div>
+    <!-- 主內容區域 -->
+    <div id="main-container">
+        <!-- 側邊欄：合作夥伴圖片 -->
+        <div id="partner-sidebar">
+            <p>合作夥伴：</p>
+            <img id="partner-img" src="partner.png" alt="合作夥伴">
+        </div>
 
-    <!-- 答案回顧區域 -->
-    <div id="review-container" style="display: none;">
-        <h2>答案回顧</h2>
-        <div id="review-content"></div>
-        <button id="back-btn">返回結果</button>
+        <!-- 測驗內容區域 -->
+        <div id="content-container">
+            <!-- 測驗區域 -->
+            <div id="quiz-container" style="display: block;">
+                <h2 id="question"></h2>
+                <div id="options"></div>
+                <button id="next-btn">下一題</button>
+            </div>
+
+            <!-- 結果區域 -->
+            <div id="result-container" style="display: none;">
+                <h2>測驗結果</h2>
+                <p>你的正確率：<span id="score"></span></p>
+                <img id="encourage-img" src="" alt="鼓勵圖片">
+                <button id="review-btn">查看答案</button>
+            </div>
+
+            <!-- 答案回顧區域 -->
+            <div id="review-container" style="display: none;">
+                <h2>答案回顧</h2>
+                <div id="review-content"></div>
+                <button id="back-btn">返回結果</button>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
